@@ -1,0 +1,51 @@
+{% extends 'home.html' %}
+{% block content %}
+<br>
+<div class="login" id="content">
+    <form method="POST" action="{% url 'emppayment'%}">
+        {%csrf_token%}
+            <h5>Worker Payment</h5>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="fn">Employee name</label><br>
+                <select name="name" class="drop" required id="name">
+              <option value="" selected>---------</option>
+              {%for i in emp%}
+              <option disabled>{{i.id}}</option>
+              <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
+              {%endfor%}
+             </select>
+              </div>
+
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+               <label for="dp">Days present</label>
+                <input type="text" name="dp" class="form-control" id='dp' placeholder="Days present" required>
+              </div>
+              <div class="form-group col-md-4">
+                 <label for="ppd">Payment per day</label>
+                <input type="text" name="ppd" class="form-control" id='ppd' placeholder="in rupees" required>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="d">Date</label>
+              <input type="date" name="d" class="form-control" id='d' required>
+            </div>
+
+    <button class="btn btn-primary" >Save</button>
+   <br>
+
+
+
+<script>
+    function openForm() {
+    document.getElementById("myForm").style.display = "block";
+    }
+
+
+    </script>
+    </form>
+
+</div>
+{%endblock%}

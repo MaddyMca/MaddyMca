@@ -1,0 +1,57 @@
+{% extends 'home.html' %}
+{% block content %}
+
+{% csrf_token %}
+
+
+<div class="form_div">
+  <h5>add workers</h5>
+<form class="form_" method="POST" action="{% url 'worker_save'%}">
+    {%csrf_token%}
+
+    <div class="form-row">
+    <div class="form-group col-md-4">
+      <label>worker Name</label><br>
+     <input name="wn" type="text" class="form-control" id="wn" placeholder="Full name here" required>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="pn">Phone Number</label>
+      <input name="pn" type="text" class="form-control" id="pn" placeholder="Phone number" pattern="[0-9]{10}" required>
+    </div>
+    </div>
+        <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="ad"> Address </label>
+      <input name="ad" type="text" class="form-control" id="ad" placeholder="Full Address " required>
+    </div>
+    <div class="form-group col-md-4">
+    <label> Work type </label><br>
+    <select name="type" required id="type">
+  <option value="" selected>---------</option>
+
+  <option value="glass_cutting">Glass Cutting</option>
+  <option value="fitting">fitting</option>
+  <option value="regular">regular</option>
+
+
+</select>
+    </div>
+        </div>
+
+<button type="submit" class="btn btn-primary">Add+</button>
+</form>
+    </div>
+<div class="detail">
+            <table class="table table-light table-striped table_detail">
+<tr><td>Worker Name</td><td>Phone number</td><td>Address</td><td>Type</td></tr>
+{% for f in info %}
+ <tr><td>{{f.worker_name}}</td><td>{{f.phone_number}}</td><td>{{f.Address}}</td><td>{{f.worker_type}}</td></tr>
+{% endfor %}
+<tr><td><button type="submit" class="btn btn-primary">View All</button></td></tr>
+</table>
+
+        </div>
+<br>
+<br>
+
+{% endblock %}

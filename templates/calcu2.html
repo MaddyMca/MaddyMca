@@ -1,0 +1,55 @@
+{% extends 'home.html' %}
+{% block content %}
+<br>
+<div class="form_div">
+<form class="form_">
+<h5>Measurements</h5>
+
+  <h3> {{obj.cust}}</h3>
+        <table class="table table-borderless table-striped table-light">
+            
+           <tr>
+           <td class="type">Top (in inch) : </td>
+           <th class="type">{{top}}<br></th>
+           <td class="type">Bottom (in inch) : </td>
+           <th class="type">{{bottom}}<br></th>
+         </tr>
+         <tr>
+           <td class="type">Left (in inch) : </td>
+           <th class="type">{{left}}<br></th>
+           <td class="type">Right (in inch) : </td>
+           <th class="type">{{right}}<br></th>
+         </tr>
+         <tr>
+           
+           <td class="type">HI (in inch) : </td>
+           <th class="type">{{hi}}<br></th>
+           <td class="type">BB (in inch): </td>
+           <th class="type">{{bb}}<br></th>
+   </tr>
+   <tr>
+       <td class="type" colspan="2">Glass (in inch) : </td>
+       <th class="type">{{g2}}<br></th>
+       <th class="type">{{g1}}<br></th>
+</tr>
+             <tr>
+       <td class="type">Rate</td>
+       <td>{{ppsf}}</td>
+       <th class="type">Area<br></th>
+       <th class="type">{{area}}<br></th>
+
+</tr>
+             <tr>
+       <th class="type" colspan="2">Total Payment<br></th>
+       <th class="type" colspan="2">{{tp}}<br></th>
+</tr>
+     </table>   
+    
+
+    <a href="#"><button class="btn btn-dark btn"  >Add another</button>
+    </a>
+
+</form>
+</div>
+    <br>
+{%endblock%}

@@ -1,0 +1,74 @@
+{% extends 'home.html' %}
+{% block content %}
+{% csrf_token %}
+<div class="detail_view">
+    <h5>Payment Detail</h5>
+    <table class="table table-light table-striped table_detail">
+        <tr><Th colspan="3">Search : </Th><th colspan="3"><input class="form-control" id="myInput" type="text" placeholder="Search.."></th></tr>
+<tr>
+    <th><form method="get" action="{% url 'filterCustomer' %}">date from : <input type="date" name="from"/> to : <input type="date" name="to"/><button type="submit" name="filter" class="btn btn-secondary btn-sm">Filter</button></form></th>
+</tr>
+    </table>
+    <table class="table table-light table-responsive-sm table-striped table_detail" >
+      <thead>
+        <tr>
+
+            <th>Date</th>
+            <th>Name</th>
+            <th>Payment per day</th>
+            <th>Days present</th>
+            <th>total payment</th>
+        </tr>
+
+
+      </thead>
+        <tbody>
+           {%for i in form%}
+    <tr>
+            <td><label>{{i.day_of_payment|date}}</label></td>
+            <td><label>{{i.emp_id}}</label></td>
+            <td><label>{{i.payment_per_day}}</label></td>
+            <td><label>{{i.days_present}}</label></td>
+            <td><label>{{i.payment}}</label></td>
+
+
+        </tr>
+        {%endfor%}
+      </tbody>
+
+
+    </table>
+
+</div>
+
+
+
+
+<br>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+$('.sort').click(function(){
+    var table = $(this).parents('table').eq(0)
+    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+    this.asc = !this.asc
+    if (!this.asc){rows = rows.reverse()}
+    for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+})
+function comparer(index) {
+    return function(a, b) {
+        var valA = getCellValue(a, index), valB = getCellValue(b, index)
+        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+    }
+}
+function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+</script>
+
+{% endblock %}

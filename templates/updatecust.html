@@ -1,0 +1,127 @@
+{% extends 'home.html' %}
+{% block content %}
+
+{% csrf_token %}
+
+
+
+<div class="form_div">
+<h5>Update Customer</h5>
+<form class="form_" method="POST" action="{% url 'update_customer_save' i.id%}">
+    {%csrf_token%}
+
+
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="cust_id">ID</label>
+      <input name="cust_id" type="text" value="{{i.id}}" class="form-control" id="cust_id" disabled>
+    </div>
+        <div class="form-group col-md-6">
+      <label for="fn">Name</label>
+      <input name="fn" type="text" value="{{i.name}}" class="form-control" id="fn" placeholder="Full Name" required>
+    </div>
+
+  </div>
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="email">E-Mail</label>
+      <input name="email" type="text" class="form-control" id="email" placeholder="xyz@abc.com" value="{{i.email}}" required>
+    </div>
+
+
+     <div class="form-group col-md-4">
+    <label for="pn">Phone Number</label>
+      <input name="pn" type="tel" class="form-control" id="pn" placeholder="1234567890" pattern="[0-9]{10}" value="{{i.phono}}">
+  </div>
+        </div>
+        <div class="form-row">
+        <div class="form-group col-md-6">
+
+    <label for="inputAddress">Address</label>
+    <input type="text" name="inputAddress" class="form-control" id="inputAddress" placeholder="1234 Main St" value="{{i.address}}" required>
+  </div>
+        </div>
+<br>
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <select id="selUser" name="inputCity" style="width:230;" class="select2">
+<option selected="selected">{{i.city}}</option>
+<option>Mumbai</option>
+<option>Pune</option>
+<option disabled="disabled" style="background-color:#3E3E3E"><font color="#FFFFFF"><i>-Goa-</i></font></option>
+<option>Panjim/Panaji</option>
+<option>Vasco Da Gama</option>
+<option>Goa-Other</option>
+<option disabled="disabled" style="background-color:#3E3E3E"><font color="#FFFFFF"><i>-Karnataka-</i></font></option>
+<option>Bengaluru/Bangalore</option>
+<option>Belgaum</option>
+<option>Bellary</option>
+<option>Bidar</option>
+<option>Dharwad</option>
+<option>Gulbarga</option>
+<option>Hubli</option>
+<option>Kolar</option>
+<option>Mangalore</option>
+<option>Mysoru/Mysore</option>
+<option>Karnataka-Other</option>
+<option disabled="disabled" style="background-color:#3E3E3E"><font color="#FFFFFF"><i>-Kerala-</i></font></option>
+<option>Calicut</option>
+<option>Cochin</option>
+<option>Ernakulam</option>
+<option>Kannur</option>
+<option>Kochi</option>
+<option>Kollam</option>
+<option>Kottayam</option>
+<option>Kozhikode</option>
+<option>Palakkad</option>
+<option>Palghat</option>
+<option>Thrissur</option>
+<option>Trivandrum</option>
+<option>Kerela-Other</option>
+<option disabled="disabled" style="background-color:#3E3E3E"><font color="#FFFFFF"><i>-Maharashtra-</i></font></option>
+<option>Ahmednagar</option>
+<option>Aurangabad</option>
+<option>Jalgaon</option>
+<option>Kolhapur</option>
+<option>Mumbai</option>
+<option>Mumbai Suburbs</option>
+<option>Nagpur</option>
+<option>Nasik</option>
+<option>Navi Mumbai</option>
+<option>Pune</option>
+<option>Solapur</option>
+<option>Maharashtra-Other</option>
+<option disabled="disabled" style="background-color:#3E3E3E"><font color="#FFFFFF"><i>-Other-</i></font></option>
+<option>Other</option>
+</select>
+
+    </div>
+
+        </div>
+
+
+
+
+
+<button type="submit" class="btn btn-primary">Update customer</button>
+
+
+
+
+
+
+<script>
+    $('.select2').select2();
+</script><br>
+<br>
+
+
+
+
+
+
+
+
+</form>
+</div>
+    {% endblock %}

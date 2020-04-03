@@ -1,0 +1,22 @@
+{% extends 'home.html' %}
+{% block content %}
+    <form  class="form" method="POST" action="{% url 'calculate_' %}">
+{% csrf_token %}
+
+
+
+<br>
+<div class="form_" id="content">
+            <h5>Measurement</h5>
+        <table class="table table-light table-borderless" >
+    {{form.as_table}}
+</table>
+
+      <button type="submit" class="btn btn-primary">Add+</button>
+
+
+
+
+
+
+{% endblock %}

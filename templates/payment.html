@@ -1,0 +1,59 @@
+{% extends 'home.html' %}
+{% block content %}
+<br>
+<div class="login" id="content">
+    <form method="POST" action="{% url 'payment2'%}">
+        {%csrf_token%}
+            <h5>Worker Payment</h5>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="fn">Name</label><br>
+                <select name="name" class="drop" required id="name">
+              <option value="" selected>---------</option>
+              {%for i in work%}
+              <option disabled>{{i.id}}</option>
+              <option value="{{i.id}}">{{i.worker_name}}</option>
+              {%endfor%}
+             </select>
+              </div>
+                 <div class="form-group col-md-4">
+                <label for="email">customer_name</label><br>
+                <select name="site" class="drop" required id="site">
+              <option value="" selected>---------</option>
+              {% for i in cust%}
+              <option disabled>{{i.id}}</option>
+              <option value="{{i.id}}">{{i.name}}</option>
+              {% endfor %}
+             </select>  </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="wiqf">Work In Sqft</label>
+                <input type="text" name="wiqf" class="form-control" id='wiqf' placeholder="in Sqft" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="rpsf">Rate per Sqft</label>
+                <input type="text" name="rpsf" class="form-control" id='rpsf' placeholder="in rupees" required>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="d">Date</label>
+              <input type="date" name="d" class="form-control" id='d' required>
+            </div>
+
+    <button class="btn btn-primary" >Save</button>
+   <br>
+
+
+
+<script>
+    function openForm() {
+    document.getElementById("myForm").style.display = "block";
+    }
+
+
+    </script>
+    </form>
+
+</div>
+{%endblock%}

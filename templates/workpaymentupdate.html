@@ -1,0 +1,59 @@
+{% extends 'home.html' %}
+{% block content %}
+<br>
+<div class="login" id="content">
+    <form method="POST" action="{% url 'update_worker_save' i.id%}">
+        {%csrf_token%}
+            <h5>Worker Payment</h5>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="fn">Name</label><br>
+                <select name="name" class="drop" required id="name">
+              <option value="" selected>{{form.worker_name}}</option>
+              {%for i in work%}
+              <option disabled>{{i.id}}</option>
+              <option value="{{i.id}}">{{i.worker_name}}</option>
+              {%endfor%}
+             </select>
+              </div>
+                 <div class="form-group col-md-4">
+                <label for="email">customer_name</label><br>
+                <select name="site" class="drop" required id="site">
+              <option value="" selected>{{form.customer_name}}</option>
+              {% for i in cust%}
+              <option disabled>{{i.id}}</option>
+              <option value="{{i.id}}">{{i.name}}</option>
+              {% endfor %}
+             </select>  </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="wiqf">Work In Sqft</label>
+                <input type="text" name="wiqf" class="form-control" id='wiqf' value="{{form.work_in_square_foot}}" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="rpsf">Rate per Sqft</label>
+                <input type="text" name="rpsf" class="form-control" id='rpsf' value="{{form.payment_per_square_ft}}" required>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="d">Date</label>
+              <input type="date" name="d" class="form-control" id='d' value="{{form.Date_of_attendance}}" required>
+            </div>
+
+    <button class="btn btn-primary" >update</button>
+   <br>
+
+
+
+<script>
+    function openForm() {
+    document.getElementById("myForm").style.display = "block";
+    }
+
+
+    </script>
+    </form>
+
+</div>
+{%endblock%}

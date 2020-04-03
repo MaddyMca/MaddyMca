@@ -1,0 +1,47 @@
+{% extends 'home.html' %}
+{% block content %}
+
+{% csrf_token %}
+
+
+
+<div class="form_div">
+<form class="form_" method="POST">
+    {%csrf_token%}
+<div class="form-row">
+    <div>
+        <label>Date from</label><input type="date" name="start_date"/><input type="date" name="end_date">
+    </div>
+</div>
+{% if messages %}
+                {%for ms in messages%}
+                {{ms}}
+        {% endfor %}
+        {%endif%}
+
+
+<button type="submit" class="btn btn-primary">Add+</button>
+</form>
+    </div>
+<div class="detail">
+            <table class="table table-light table-striped table_detail">
+<tr><td>Material Name</td><td>Material Quantity</td><td>Price Per Unit</td><td>Total Price</td><td>Date & Time</td></tr>
+{% for f in info %}
+ <tr><td>{{f.material_id}}</td><td>{{f.material_quantity}}</td><td>{{f.price_per_unit}}</td><td>{{f.total_price}}</td><td>{{f.Purchase_date}}</td></tr>
+{% endfor %}
+<tr><td><button type="submit" class="btn btn-primary">View All</button></td></tr>
+</table>
+
+        </div>
+<br>
+<br>
+
+
+
+
+
+
+
+
+</form>
+{% endblock %}

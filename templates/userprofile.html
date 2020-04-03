@@ -1,0 +1,114 @@
+{% extends 'home.html' %}
+{% block content %}
+
+{% csrf_token %}
+
+<form action="{% url 'updateemp' desig.id %}">
+
+<div class="form_div">
+  <h5>Profile</h5>
+     <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="fn">First Name</label>
+      <input value="{{request.user.first_name}}" name="fn" type="text" class="form-control" id="fn" placeholder="First Name" required>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="ln">Last Name</label>
+      <input value="{{request.user.last_name}}" name="ln" type="text" class="form-control" id="ln" placeholder="Last Name" required>
+    </div>
+       <div class="form-group col-md-4">
+      <label for="email">E-Mail</label>
+      <input name="email" value="{{desig.email}}" type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="email" placeholder="xyz@abc.com" required>
+    </div>
+  </div>
+    <div class="form-row">
+     <div class="form-group col-lg-6">
+    <label for="pn">Phone Number</label>
+      <input name="pn" value="{{desig.phono}}" type="tel" class="form-control" id="pn" placeholder="1234567890" pattern="[0-9]{10}">
+  </div>
+    <div class="form-group col-md-2">
+      {% for f in form%}
+      <label> {{f.label}}</label>
+    {{f}}
+        {%endfor%}
+    </div>
+
+
+
+             <div class="form-group col-md-8">
+      <label for="un">Username</label>
+      <input name="un" type="text" value="{{desig.username}}" class="form-control" id="un" placeholder="Username" required>
+    </div>
+  </div>
+
+
+
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input type="text" value="{{desig.address}}" name="inputAddress" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+     <select id="selUser" name="inputCity" style="width:230" class="select2">
+<option selected="selected">{{desig.city}}</option>
+<option>Mumbai</option>
+<option>Pune</option>
+<option disabled="disabled" style="background-color:#3E3E3E"><font color="#FFFFFF"><i>-Goa-</i></font></option>
+<option>Panjim/Panaji</option>
+<option>Vasco Da Gama</option>
+<option>Goa-Other</option>
+<option disabled="disabled" style="background-color:#3E3E3E"><font color="#FFFFFF"><i>-Karnataka-</i></font></option>
+<option>Bengaluru/Bangalore</option>
+<option>Belgaum</option>
+<option>Bellary</option>
+<option>Bidar</option>
+<option>Dharwad</option>
+<option>Gulbarga</option>
+<option>Hubli</option>
+<option>Kolar</option>
+<option>Mangalore</option>
+<option>Mysoru/Mysore</option>
+<option>Karnataka-Other</option>
+<option disabled="disabled" style="background-color:#3E3E3E"><font color="#FFFFFF"><i>-Kerala-</i></font></option>
+<option>Calicut</option>
+<option>Cochin</option>
+<option>Ernakulam</option>
+<option>Kannur</option>
+<option>Kochi</option>
+<option>Kollam</option>
+<option>Kottayam</option>
+<option>Kozhikode</option>
+<option>Palakkad</option>
+<option>Palghat</option>
+<option>Thrissur</option>
+<option>Trivandrum</option>
+<option>Kerela-Other</option>
+<option disabled="disabled" style="background-color:#3E3E3E"><font color="#FFFFFF"><i>-Maharashtra-</i></font></option>
+<option>Ahmednagar</option>
+<option>Aurangabad</option>
+<option>Jalgaon</option>
+<option>Kolhapur</option>
+<option>Mumbai</option>
+<option>Mumbai Suburbs</option>
+<option>Nagpur</option>
+<option>Nasik</option>
+<option>Navi Mumbai</option>
+<option>Pune</option>
+<option>Solapur</option>
+<option>Maharashtra-Other</option>
+<option disabled="disabled" style="background-color:#3E3E3E"><font color="#FFFFFF"><i>-Other-</i></font></option>
+<option>Other</option>
+</select>
+
+    </div>
+
+
+      </div>
+
+<button type="submit" class="btn btn-primary">Update</button>
+
+
+</div>
+    </form>
+{% endblock %}
