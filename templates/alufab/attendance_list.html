@@ -1,0 +1,85 @@
+{% extends 'home.html' %}
+{% block content %}
+
+{% csrf_token %}
+<div class="detail_view">
+    <h5>Employee Detail</h5>
+    {{object}}
+    <table class="table table-light table-responsive-sm table-striped table_detail">
+        <tr><Th colspan="3">Search : </Th><th colspan="3"><input class="form-control" id="myInput" type="text" placeholder="Search.."></th><th><sub>Search by Date,Employee Name, Worker Name, Customer Name</sub></th></tr>
+<tr>
+    <th><form method="get" action="{% url 'filterCustomer' %}">date from : <input type="date" name="from"/> to : <input type="date" name="to"/><button type="submit" name="filter" class="btn btn-secondary btn-sm">Filter</button></form></th>
+</tr>
+    </table>
+    <table class="table table-light table-responsive-sm table-striped table_detail" id="myTable">
+      <thead>
+
+          <tr>
+
+                <th class="sort">Date</th>
+                <th class="sort">ID</th>
+                <th class="sort">Name</th>
+                <th class="sort">Employee Name</th>
+                <th class="sort">Customer name</th>
+                <th class="sort">Work in ff<sup>2<sup></th>
+                <th class="sort">Rate per ff<sup>2</sup></th>
+                <th class="sort">Total in rupee</th>
+
+
+
+
+            </tr
+          </thead>
+          <tbody>
+            {%for i in obj%}
+            <tr>
+                <td><label>{{i.Date_of_attendance}}</label></td>
+                <td><label>{{i.id}}</label></td>
+                <td><label>{{i.worker_name}}</label></td>
+                <td><label>{{i.Emp_id.Emp_id}}</label></td>
+                <td><label>{{i.customer_name.name}}</label></td>
+                <td><label>{{i.work_in_square_foot}} ff<sup>2<sup></label></td>
+                <td><label>{{i.payment_per_square_ft}} </label></td>
+                <td><label>{{i.total_payment}} </label></td>
+
+
+
+
+            </tr>
+            {%endfor%}
+          </tbody>
+
+
+        </table>
+</div>
+
+
+
+<br>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+$('.sort').click(function(){
+    var table = $(this).parents('table').eq(0)
+    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+    this.asc = !this.asc
+    if (!this.asc){rows = rows.reverse()}
+    for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+})
+function comparer(index) {
+    return function(a, b) {
+        var valA = getCellValue(a, index), valB = getCellValue(b, index)
+        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+    }
+}
+function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+</script>
+
+{% endblock %}

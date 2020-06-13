@@ -1,0 +1,22 @@
+{% extends 'home.html' %}
+{% block content %}
+    <form  class="form" method="POST">
+{% csrf_token %}
+
+
+
+<br>
+<div id="content">
+            <h5>Employee Update</h5>
+        <table class="table table-borderless table-light bg-light" >
+    {{form.as_table}}
+</table>
+
+      <button type="submit" class="btn btn-primary">Update</button>
+
+
+
+
+
+
+{% endblock %}

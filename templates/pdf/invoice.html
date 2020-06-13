@@ -185,11 +185,11 @@ tr:hover .cut { opacity: 1; }
 			<table class="meta">
 				<tr>
 					<th><span contenteditable>Invoice #</span></th>
-					<td><span contenteditable>101138</span></td>
+					<td><span contenteditable>{{b.id}}</span></td>
 				</tr>
 				<tr>
 					<th><span contenteditable>Date</span></th>
-					<td><span contenteditable>January 1, 2012</span></td>
+					<td><span contenteditable>{{b.completion_date}}</span></td>
 				</tr>
 				<tr>
 					<th><span contenteditable>Amount Due</span></th>
@@ -229,11 +229,11 @@ tr:hover .cut { opacity: 1; }
 				</tr>
 				<tr>
 					<th><span contenteditable>Amount Paid</span></th>
-					<td><span data-prefix>Rs</span> <span contenteditable>0.00</span></td>
+					<td><span data-prefix>Rs</span> <span contenteditable>{{b.paid_payment}}</span></td>
 				</tr>
 				<tr>
 					<th><span contenteditable>Balance Due</span></th>
-					<td><span data-prefix>Rs</span> <span>{{obj.total_payment}}</span></td>
+					<td><span data-prefix>Rs</span> <span>{{pay}}</span></td>
 				</tr>
 
 			</table>

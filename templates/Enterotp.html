@@ -1,0 +1,33 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Alufab</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="cont">
+
+  <div class="form" >
+   <form method="post" action="{% url 'custpassword' email %}">
+		{% csrf_token %}
+      <h1>Customer Login</h1>
+      <input type="text"
+             class="user"
+			 name="mail"
+             value={{email}}>
+      <input type="text"
+             class="user"
+			 name="otp"
+             placeholder="Enter otp">
+
+      <button class="login">submit</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

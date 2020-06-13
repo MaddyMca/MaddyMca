@@ -30,6 +30,19 @@
   </div>
         </div>
         <div class="form-row">
+           <div class="form-group col-md-6">
+           <label for="pass">Password</label>
+           <input name="pass" type="password" class="form-control" id="pass" placeholder="Password" required>
+               <br>
+               <m><input type="checkbox" onclick="myFunction()">Show Password</m>
+         </div>
+         <div class="form-group col-md-6">
+           <label for="re-pass">Re-enter Password</label>
+           <input type="password" class="form-control" id="re-pass" placeholder="Password" required>
+             <span id='message'></span>
+         </div>
+        </div>
+        <div class="form-row">
         <div class="form-group col-md-6">
 
     <label for="inputAddress">Address</label>
@@ -280,54 +293,28 @@
 </select>
     </div>
         </div>
-<div class="form-row">
-        <div class="form-group col-md-6">
 
-    <label>Username</label>
-    <input type="text" name="Uname" class="form-control" id="Uname" placeholder="Username" required>
-  </div>
-
-  <div class="form-group col-md-6">
-    <label for="inputAddress2">Password</label>
-    <input type="text" name="Password" class="form-control" id="Password" placeholder="Password">
-  </div>
-
-
-
-
-        </div>
-
-
-
-
-{% if messages %}
-                {%for ms in messages%}
-                {{ms}}
-        {% endfor %}
-        {%endif%}
-
-
-
-
-
-<a href="{% url 'addcust'%}"><button type="submit" class="btn btn-primary">Add+</button></a>
-
-
-
-
-
+<button type="submit" class="btn btn-primary">Add+</button>
 
 </form>
-    </div>
-<br>
-<br>
+<script>
+function myFunction() {
+  var x = document.getElementById("pass");
+  var y = document.getElementById("re-pass");
+  if (x.type === "password") {
+    x.type = "text";
+    y.type = "text"
+  } else {
+    x.type = "password";
+    y.type="password"
+  }
+}
 
-
-
-
-
-
-
-
-</form>
+$('#pass, #re-pass').on('keyup', function () {
+  if ($('#pass').val() == $('#re-pass').val()) {
+    $('#message').html('Matching').css('color', 'green');
+  } else
+    $('#message').html('Not Matching').css('color', 'red');
+});
+</script>
 {% endblock %}

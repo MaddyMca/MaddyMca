@@ -1,0 +1,70 @@
+{% extends 'home.html' %}
+{% block content %}
+
+{% csrf_token %}
+<div class="detail_view">
+    <h5>{{object.first_name}} {{object.last_name}} </h5>
+  <table class="table table-light table-responsive-sm table-striped table_detail">
+  <tr>
+    <td>Designation</td><td>{{object.designation}}</td>
+  </tr>
+  <tr>
+    <td>Username</td><td>{{object.Emp_id.username}}</td>
+  </tr>
+  <tr>
+    <td>Email</td><td>{{object.Emp_id.email}}</td>
+  </tr>
+  <tr>
+    <td>Address</td><td>{{object.Address}}</td>
+  </tr>
+  <tr>
+    <td>City</td><td>{{object.city}}</td>
+  </tr>
+  <tr>
+    <td>Phone number</td><td>{{object.phono}}</td>
+  </tr>
+  <tr>
+    <td>Date joined</td><td>{{object.Emp_id.date_joined}}</td>
+  </tr>
+  <tr>
+    <td>Last Login</td><td>{{object.Emp_id.last_login}}</td>
+  </tr>
+  <tr>
+    <td>Working</td><td>{% if object.is_working == True %}Yes{% else %}No{%endif%}</td>
+  </tr>
+  <tr>
+    </tr>
+
+  </table>
+</div>
+
+
+
+<br>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+$('.sort').click(function(){
+    var table = $(this).parents('table').eq(0)
+    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+    this.asc = !this.asc
+    if (!this.asc){rows = rows.reverse()}
+    for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+})
+function comparer(index) {
+    return function(a, b) {
+        var valA = getCellValue(a, index), valB = getCellValue(b, index)
+        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+    }
+}
+function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+</script>
+
+{% endblock %}
