@@ -1,0 +1,50 @@
+{% extends 'home.html' %}
+{% block content %}
+    <form  class="form_div" method="POST" action="{% url 'Worker_attend' %}">
+{% csrf_token %}
+<div class="form_" id="content">
+            <h5>Worker Attendance</h5>
+
+          <div class="form-row">
+          <div class="form-group col-md-4">
+    <label>Worker name</label> <select name="Work" required>
+  <option selected>---------</option>
+{% for i in form%}
+  <option disabled>{{i.id}}</option>
+  <option value="{{i.id}}">{{i.worker_name}}</option>
+{% endfor %}
+
+</select>
+</div>
+<div class="form-group col-md-4">
+<label>Customer name</label> <select name="cust" required>
+<option selected>---------</option>
+{% for i in form1%}
+<option disabled>{{i.id}}</option>
+<option value="{{i.id}}">{{i.name}}</option>
+{% endfor %}
+
+</select>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group col-md-4">
+<label>Work in square foot:</label>
+<input type="text" class="form-control" name="wisf" maxlength="20" required >
+</div>
+<div class="form-group col-md-4">
+<label>Rate per square foot:</label>
+<input type="text" class="form-control" name="rpsf" maxlength="20" required>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group col-md-4">
+  <label>Date</label>
+  <input type="date" class="form-control" name="date" maxlength="20" required>
+</div>
+</div>
+<br>
+<button type="submit" class="btn btn-primary">Add+</button>
+
+
+{% endblock %}

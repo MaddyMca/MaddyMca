@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+{% block content %}
+    <form  class="form_div" method="POST" action="{% url 'Worker_attend' %}">
+{% csrf_token %}
+<div class="form_" id="content">
+            <h5>Employee Attendance</h5>
+<table class="table table-light table-responsive-sm table-striped">
+  <tr>
+          <td><label>{{total}} Employees</label>
+</tr>
+  {% for i in obj %}
+<tr>
+
+  <td>
+
+          {{i.Emp_id.first_name}} {{i.Emp_id.last_name}}
+          </td>
+<td>
+          <a href="{% url 'Emp_attend_save' i.id%}" style="color: green;">Present</a>/
+          <a href="{% url 'Emp_attend_save1' i.id%}" style="color: red;">Absent</a>
+
+</td>
+
+</tr>
+{% endfor %}
+      </table>
+
+
+
+{% endblock %}
