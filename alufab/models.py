@@ -125,6 +125,8 @@ class Used_material(models.Model):
     used = models.FloatField(default=0)
     cust_name=models.ForeignKey(customer, on_delete=models.CASCADE)
     Emp_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    Mat_id = models.ForeignKey(material_inventory, on_delete=models.CASCADE)
+    userd_on = models.DateField(default=datetime.today)
 class Empattendance(models.Model):
     Emp_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.now, blank=True)

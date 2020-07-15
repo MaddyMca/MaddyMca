@@ -616,6 +616,14 @@ def DetailInv1(request):
     data={'obj':obj,'desig':desig}
     return render(request, 'alufab/material_inventory_list.html', data)
 
+def Detailenv2(request):
+    obj=Used_material.objects.all()
+    empid = request.user.id
+    desig = Employee.objects.get(Emp_id=empid)
+    data={'obj':obj,'desig':desig}
+    return render(request, 'alufab/material_used_inventory_list.html', data)
+
+
 def DetailWorkAttend(request):
     obj=attendance.objects.all()
     empid = request.user.id
@@ -727,40 +735,7 @@ def Approved(request,id):
 
 #update records
 
-class CustomerUpdate(UpdateView):
-    model = customer
-    fields = ['name','email','address','city','phono']
-    success_url = reverse_lazy('DetailCust')
 
-class EmployeeUpdate(UpdateView):
-    model = Employee
-    fields = ['name','email','address','city','phono']
-    success_url = reverse_lazy('DetailCust')
-
-class CustomerUpdate(UpdateView):
-    model = customer
-    fields = ['name','email','address','city','phono']
-    success_url = reverse_lazy('DetailCust')
-
-class CustomerUpdate(UpdateView):
-    model = customer
-    fields = ['name','email','address','city','phono']
-    success_url = reverse_lazy('DetailCust')
-
-class CustomerUpdate(UpdateView):
-    model = customer
-    fields = ['name','email','address','city','phono']
-    success_url = reverse_lazy('DetailCust')
-
-class EmployeeUpdate(UpdateView):
-    model = Employee
-    fields = ['phono','Address','city','designation','Paymentperday','is_working' ]
-    success_url = reverse_lazy('DetailEmps')
-
-class WorkerUpdate(UpdateView):
-    model = worker
-    fields = ['worker_name','phone_number','Address','worker_type']
-    success_url = reverse_lazy('DetailWork')
 
 def UpdateInventory(request,id):
     empid = request.user.id
@@ -850,3 +825,170 @@ def addcost(request,id):
         cust = customer.objects.get(id=obj.customer_name.id)
         resopnce = redirect('mesdetail', cust.id)
         return resopnce
+
+def profile(request):
+    if not request.user.is_authenticated:
+        return render(request, 'notloggedin.html')
+    elif request.user.is_authenticated:
+        if request.method == 'POST':
+            fn = request.POST['fn']
+            ln = request.POST['ln']
+            pn = request.POST['pn']
+            ad = request.POST['inputAddress']
+            ad3 = request.POST['inputCity']
+            de = request.POST['designation']
+            em = request.POST['email']
+            ppd = float(request.POST['ppd'])
+            is_working = request.POST['work']
+
+
+            Employee.objects.filter(Emp_id=request.user.id).update(phono=pn,Address=ad,city=ad3,designation=de,Paymentperday=ppd,is_working=is_working)
+            User.objects.filter(id=request.user.id).update(first_name=fn,last_name=ln,email=em)
+                # user = User.objects.create_superuser(username=un,password=pa,email=em)
+                # user.last_name=ln
+                # user.first_name=fn
+                # user.date_joined=datetime.now()
+                # user.email=em
+                # user.save()
+                # obj = User.objects.get(last_name=ln,first_name=fn,email=em)
+                # emp = Employee(Emp_id=obj, Address=ad,phono=pn,designation=de,city=ad3,Paymentperday=ppd)
+                # emp.save()
+            empid = request.user.id
+            desig = Employee.objects.get(Emp_id=empid)
+            resopnce = redirect('DetailEmps')
+            return resopnce
+        else:
+            empid = request.user.id
+            desig = Employee.objects.get(Emp_id=empid)
+            obj=User.objects.get(id=request.user.id)
+            emp = Employee.objects.get(Emp_id=request.user.id)
+            empid = request.user.id
+            desig = Employee.objects.get(Emp_id=empid)
+            data={'obj':obj,'desig':desig,'emp':emp,'desig':desig}
+            return render(request, 'alufab/user_form.html', data)
+
+def profile1(request,id):
+    if not request.user.is_authenticated:
+        return render(request, 'notloggedin.html')
+    elif request.user.is_authenticated:
+        if request.method == 'POST':
+            fn = request.POST['fn']
+            ln = request.POST['ln']
+            pn = request.POST['pn']
+            ad = request.POST['inputAddress']
+            ad3 = request.POST['inputCity']
+            de = request.POST['designation']
+            em = request.POST['email']
+            ppd = float(request.POST['ppd'])
+            is_working = request.POST['work']
+
+
+            Employee.objects.filter(Emp_id=id).update(phono=pn,Address=ad,city=ad3,designation=de,Paymentperday=ppd,is_working=is_working)
+            User.objects.filter(id=id).update(first_name=fn,last_name=ln,email=em)
+            empid = request.user.id
+            desig = Employee.objects.get(Emp_id=empid)
+            resopnce = redirect('DetailEmps')
+            return resopnce
+        else:
+            empid = request.user.id
+            desig = Employee.objects.get(Emp_id=empid)
+            obj=User.objects.get(id=request.user.id)
+            emp = Employee.objects.get(Emp_id=request.user.id)
+            empid = request.user.id
+            desig = Employee.objects.get(Emp_id=empid)
+            data={'obj':obj,'desig':desig,'emp':emp,'desig':desig}
+            return render(request, 'alufab/updateemp.html', data)
+
+
+def update_uname(request):
+    if not request.user.is_authenticated:
+        return render(request, 'notloggedin.html')
+    elif request.user.is_authenticated:
+        if request.method == 'POST':
+            un = request.POST['un']
+            if User.objects.filter(username=un).exists():
+                messages.info(request, 'Username is not unique')
+                resopnce = redirect('DetailEmps')
+                return resopnce
+            else:
+                User.objects.filter(id=request.user.id).update(username=un)
+                resopnce = redirect('login_')
+                messages.info(request, 'Username Updated')
+                return resopnce
+        else:
+            user=User.objects.get(id=request.user.id)
+            empid = request.user.id
+            desig = Employee.objects.get(Emp_id=empid)
+            data={'desig':desig,'user':user}
+            return render(request, 'alufab/Update_Username.html', data)
+
+def update_pass(request):
+    if not request.user.is_authenticated:
+        return render(request, 'notloggedin.html')
+    elif request.user.is_authenticated:
+        if request.method == 'POST':
+            pass1 = request.POST['pass']
+            u=User.objects.get(id=request.user.id)
+            u.set_password(pass1)
+            u.save()
+            resopnce = redirect('login_')
+            messages.info(request, 'Username Updated')
+            return resopnce
+        else:
+            user=User.objects.get(id=request.user.id)
+            empid = request.user.id
+            desig = Employee.objects.get(Emp_id=empid)
+            data={'desig':desig,'user':user}
+            return render(request, 'alufab/Update_password.html', data)
+
+def update_custmer(request,id):
+    if not request.user.is_authenticated:
+        return render(request, 'notloggedin.html')
+    elif request.user.is_authenticated:
+        if request.method == 'POST':
+            fn = request.POST['fn']
+            pn = request.POST['pn']
+            ad = request.POST['inputAddress']
+            ad3 = request.POST['inputCity']
+            em = request.POST['email']
+            empid = request.user.id
+            emp = Employee.objects.get(id=empid)
+            customer.objects.filter(id=id).update(name=fn,email=em, address=ad, phono=pn,city=ad3)
+
+
+            # subject = 'Login information for PrideAlu fab'
+            # message = 'usename = ' + n + 'password = ' + password
+            # email_from = settings.EMAIL_HOST_USER
+            # mail = name.email
+            # recipient_list = [mail]
+            # send_mail(subject, message, email_from, recipient_list)
+            resopnce = redirect('DetailCust')
+            messages.info(request, 'Customer Updated')
+            return resopnce
+
+
+        else:
+            user=customer.objects.get(id=id)
+            empid = request.user.id
+            desig = Employee.objects.get(Emp_id=empid)
+            data={'desig':desig,'user':user}
+            return render(request, 'alufab/customer_form.html', data)
+def updateWork(request,id):
+    if not request.user.is_authenticated:
+        return render(request, 'notloggedin.html')
+    elif request.user.is_authenticated:
+        if request.method == 'POST':
+            wn = request.POST['wn']
+            pn = request.POST['pn']
+            ad = request.POST['ad']
+            ty = request.POST['type']
+            worker.objects.filter(id=id).update(worker_name=wn,phone_number=pn,Address=ad,worker_type=ty)
+            messages.info(request,'Worker updated')
+            resopnce = redirect('DetailWork')
+            return resopnce
+        else:
+            user=worker.objects.get(id=id)
+            empid = request.user.id
+            desig = Employee.objects.get(Emp_id=empid)
+            data={'desig':desig,'user':user}
+            return render(request, 'alufab/worker_form.html', data)

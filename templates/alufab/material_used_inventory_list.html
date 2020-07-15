@@ -3,12 +3,14 @@
 
 {% csrf_token %}
 <div class="detail_view">
-    <h5>Employee Detail</h5>
-    {{object}}
+    <h5>Used Inventory Detail</h5>
     <table class="table table-light table-responsive-sm table-striped table_detail">
-        <tr><Th colspan="3">Search : </Th><th colspan="3"><input class="form-control" id="myInput" type="text" placeholder="Search.."></th><th><sub>Search by Date, Name</sub></th></tr>
+        <tr><Th colspan="3">Search : </Th><th colspan="3"><input class="form-control" id="myInput" type="text" placeholder="Search.."></th><th><sub>Search by Id, Name </sub></th></tr>
 <tr>
     <th><form method="get" action="{% url 'filterCustomer' %}">date from : <input type="date" name="from"/> to : <input type="date" name="to"/><button type="submit" name="filter" class="btn btn-secondary btn-sm">Filter</button></form></th>
+</tr>
+<tr>
+  <td>click here to go <a href="{% url 'DetailInv1' %}">used material</a> or <a href="{% url 'DetailInv0' %}">all material</a></td>
 </tr>
     </table>
     <table class="table table-light table-responsive-sm table-striped table_detail" id="myTable">
@@ -16,12 +18,14 @@
 
           <tr>
 
-              <th class="sort">Date</th>
                 <th class="sort">ID</th>
                 <th class="sort">Name</th>
-                <th class="sort">Address</th>
-                <th class="sort">City</th>
-                <th class="sort">Phone number</th>
+                <th class="sort">Added by</th>
+                <th class="sort">Description</th>
+                <th class="sort">Quantity</th>
+                <th class="sort">Price</th>
+                <th class="sort">Total Ammount</th>
+                <td class="sort"> Used on</td>
 
 
 
@@ -30,17 +34,17 @@
           <tbody>
             {%for i in obj%}
             <tr>
-                <td><label>{{i.cust_date}}</label></td>
-                <td><label>{{i.id}}</label></td>
-                <td><label>{{i.name}}</label></td>
-                <td><label>{{i.city}}</label></td>
-                <td><label>{{i.address}}</label></td>
-                <td><label>{{i.phono}}</label></td>
 
-                <td><a href="{% url 'mesdetail' i.id%}"><button class="btn btn-sm btn-dark">View all</button></a></td>
-                <td><a  href="{% url 'genratebill' i.id%}"><button class="btn btn-sm btn-success">Generate invoice</button></a></td>
-<td><a  href="{% url 'update_custmer' i.id%}"><button class="btn btn-sm btn-success">Edit</button></a></td>
+                <td><label>{{i.Mat_id.id}}</label></td>
+                <td><label>{{i.Mat_id.material_name}}</label></td>
+                <td><label>{{i.Mat_id.Emp_id.Emp_id}}</label></td>
+                <td><label>{{i.Mat_id.matrial_description}}</label></td>
+                <td><label>{{i.Mat_id.quantity}}</label></td>
+                <td><label>{{i.Mat_id.price}}</label></td>
+                <td><label>{{i.Mat_id.total_amt}}</label></td>
+                <td><label>{{i.userd_on}}</label></td>
 
+                <td><a href="{% url 'UpdateInventory' i.id%}"><button class="btn btn-sm btn-primary">Update</button></a></td>
 
 
             </tr>
@@ -49,7 +53,6 @@
 
 
         </table>
-
 </div>
 
 

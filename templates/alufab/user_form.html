@@ -1,36 +1,35 @@
 {% extends 'home.html' %}
+
 {% block content %}
 
-<div>
-
-
-<form class="form_div" method="POST" action="register">
-
-<h5>Add Employee</h5>
+    <form  class="form_div" method="POST" action="{% url 'profile' %}">
+<h5>Update Employee</h5>
+for update <a href="{% url 'update_uname'%}">username</a> or <a href="{% url 'update_pass'%}">Password</a>
     {%csrf_token%}
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="fn">First Name</label>
-      <input name="fn" type="text" class="form-control" id="fn" placeholder="First Name" required>
+      <input name="fn" type="text" class="form-control" id="fn" value="{{obj.first_name}}">
     </div>
     <div class="form-group col-md-6">
       <label for="ln">Last Name</label>
-      <input name="ln" type="text" class="form-control" id="ln" placeholder="Last Name" required>
+      <input name="ln" type="text" class="form-control" id="ln" value="{{obj.last_name}}">
     </div>
+    </div>
+
+    <div class="form-row">
        <div class="form-group col-md-6">
       <label for="email">E-Mail</label>
-      <input name="email" type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="email" placeholder="xyz@abc.com" required>
+      <input name="email" type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="email" value="{{obj.email}}">
     </div>
-  </div>
-    <div class="form-row">
      <div class="form-group col-lg-6">
     <label for="pn">Phone Number</label>
-      <input name="pn" type="tel" class="form-control" id="pn" placeholder="1636567890" pattern="[0-9]{10}">
+      <input name="pn" type="tel" class="form-control" id="pn" value="{{emp.phono}}" pattern="[0-9]{10}">
   </div>
     <div class="form-group col-md-6">
       <label> Designation</label><br>
    <select name="designation" class="drop" required id="id_designation">
- <option value="" selected>---------</option>
+ <option value="{{emp.designation}}" selected>---------</option>
 
  <option value="Manager">Manager</option>
 
@@ -42,40 +41,19 @@
 
     </div>
 
+</div>
 
 
-             <div class="form-group col-md-8">
-      <label for="un">Username</label>
-      <input name="un" type="text" class="form-control" id="un" placeholder="Username" required>
-    </div>
-  </div>
-
-
-
-
- <div class="form-row">
-    <div class="form-group col-md-6">
-    <label for="pass">Password</label>
-    <input name="pass" type="password" class="form-control" id="pass" placeholder="Password" required>
-        <br>
-        <m><input type="checkbox" onclick="myFunction()">Show Password</m>
-  </div>
-  <div class="form-group col-md-6">
-    <label for="re-pass">Re-enter Password</label>
-    <input type="password" class="form-control" id="re-pass" placeholder="Password" required>
-      <span id='message'></span>
-  </div>
- </div>
  <label for="inputAddress">Address</label>
   <div class="form-group">
 
-    <textarea name="inputAddress" rows="8" placeholder="address" cols="40"></textarea>  </div>
+    <textarea name="inputAddress" rows="8"  cols="40">{{emp.Address}}</textarea>  </div>
 
   <div class="form-row">
     <div class="form-group col-md-6">
       <label>City</label><br>
      <select id="selUser" name="inputCity">
-<option selected="selected">City</option>
+<option selected value="{{emp.city}}">City</option>
 <option>Mumbai</option>
 <option>Pune</option>
 <option disabled="disabled" style="background-color:#3E3E3E"><font color="#FFFFFF"><i>-Goa-</i></font></option>
@@ -128,13 +106,20 @@
     </div>
     <div class="form-group col-md-6">
       <label>Payment per day</label>
-      <input type="text" name="ppd" placeholder="in rupee">
+      <input type="text" name="ppd" value="{{emp.Paymentperday}}">
 
     </div>
+    <div class="form-group col-md-6">
+      <label>Still working : </label>
+      <input type="radio" id="True" name="work" value="True" required>
+    <label for="False">Yes </label>
+    <input type="radio" id="False" name="work" value="False" required>
+    <label for="female"> No</label><br>
 
+    </div>
       </div>
 
-<button type="submit" class="btn btn-primary">Sign in</button>
+<button type="submit" class="btn btn-primary">Update</button>
     <div class="form-row">
     <div class="form-group col-md-6">
 
@@ -147,27 +132,12 @@
     </div>
 <br>
 <br>
+
 <script>
-function myFunction() {
-  var x = document.getElementById("pass");
-  var y = document.getElementById("re-pass");
-  if (x.type === "password") {
-    x.type = "text";
-    y.type = "text"
-  } else {
-    x.type = "password";
-    y.type="password"
-  }
-}
-
-$('#pass, #re-pass').on('keyup', function () {
-  if ($('#pass').val() == $('#re-pass').val()) {
-    $('#message').html('Matching').css('color', 'green');
-  } else
-    $('#message').html('Not Matching').css('color', 'red');
-});
-
  $('.select6').select6();
 </script>
+
+
+
 
 {% endblock %}

@@ -32,7 +32,7 @@
         Even the little one matters.</h>
       <div style="float:right; color:white;">
         contact : 1234567890
-        email : abc@xyz.com
+        email : pridealufab@gamil.com
       </div>
     </div>
 
@@ -94,6 +94,9 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% url 'Inventory'%}">Add New</a>
               <a class="dropdown-item" href="{% url 'DetailInv'%}">View Details</a>
+              <a class="dropdown-item" href="{% url 'Detailenv2'%}">Used Materail</a>
+
+
             </div>
           </li>
 
@@ -115,7 +118,7 @@
       </span>
 <span class="Name">
   Hi {{request.user.first_name}} {{request.user.last_name}}, You are {{desig.designation}}
-              <a href="#"><button class="btn btn-sm btn-info">profile</button></a>
+              <a href="{% url 'profile' %}"><button class="btn btn-sm btn-info">profile</button></a>
 
           </span>
 </div>

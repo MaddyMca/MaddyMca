@@ -2,7 +2,7 @@ from . import views
 from django.contrib import admin
 from django.urls import path, include, URLPattern,re_path
 from django.conf.urls import url
-from .views import DetailEmp,CustomerUpdate,EmployeeUpdate,WorkerUpdate
+from .views import DetailEmp
 from django.contrib.auth import views as auth_views
 #from .views import detailmesure, CustDelete,del_mesurements,update_measurement,del_worker,del_attendance
 urlpatterns = [
@@ -24,6 +24,7 @@ path("Emp_attend_save1/<int:id>/", views.Emp_attend_save1, name='Emp_attend_save
 path("otpcust", views.otpcust, name='otpcust'),
 path("custpassword/<email>/", views.custpassword, name='custpassword'),
 path("changepass/<email>/", views.changepass, name='changepass'),
+path("update_custmer/<id>/", views.update_custmer, name='update_custmer'),
 
 
 
@@ -58,10 +59,10 @@ path("DetailCust", views.DetailCust, name='DetailCust'),
 path('DetailInv', views.DetailInv,name='DetailInv'),
 path('DetailInv0', views.DetailInv0,name='DetailInv0'),
 path('DetailInv1', views.DetailInv1,name='DetailInv1'),
+path('Detailenv2', views.Detailenv2,name='Detailenv2'),
+path('updateWork/<id>/', views.updateWork,name='updateWork'),
 
-path("CustomerUpdate/<pk>/", CustomerUpdate.as_view(), name='CustomerUpdate'),
-path("EmployeeUpdate/<pk>/", EmployeeUpdate.as_view(), name='EmployeeUpdate'),
-path("WorkerUpdate/<pk>/", WorkerUpdate.as_view(), name='WorkerUpdate'),
+
 path("UpdateInventory/<int:id>/", views.UpdateInventory, name='UpdateInventory'),
 
 
@@ -81,6 +82,19 @@ path('password-reset/',auth_views.PasswordResetView.as_view(template_name='users
 path('password-reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'),name='password_reset_done'),
 path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'),name='password_reset_confirm'),
 path('password-reset-complete/',auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),name='password_reset_complete'),
+path("profile", views.profile, name='profile'),
+path("profile1/<id>/", views.profile1, name='profile1'),
+
+path("update_pass", views.update_pass, name='update_pass'),
+path("update_uname", views.update_uname, name='update_uname'),
+path("updateWork/<id>/", views.updateWork, name='updateWork'),
+
+
+
+
+
+
+
 # url(r'^password_reset/$', auth_views.password_reset, name='password_reset'),
 # url(r'^password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
 # url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',auth_views.password_reset_confirm, name='password_reset_confirm'),
