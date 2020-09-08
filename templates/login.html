@@ -22,11 +22,7 @@
 <!--===============================================================================================-->
 
 
-{% if messages %}
-                {%for ms in messages%}
-                {{ms}}
-        {% endfor %}
-        {%endif%}
+
 
 </head>
 <body>
@@ -36,7 +32,7 @@
   <div class="form" >
     <form method="post" action="{% url 'login_'%}">
 		{% csrf_token %}
-      <h1>Login</h1>
+      <h1>Employee Login</h1>
       <input type="text"
              class="user"
 			 name="u"
@@ -47,6 +43,11 @@
              placeholder="Password"/>
 						 <a href="{% url 'password_reset' %}">Forgot Password</a>
       <button class="login">Login</button>
+			{% if messages %}
+			                {%for ms in messages%}
+			                {{ms}}
+			        {% endfor %}
+			        {%endif%}
     </form>
   </div>
 </div>
